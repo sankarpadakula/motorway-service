@@ -1,0 +1,26 @@
+services:
+  db:
+    image: motorway-test-backend
+    container_name: motorway-test-backend
+    build:
+      context: .
+      target: motorway-test-backend
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=motorway
+    ports:
+      - 5433:5432
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    ports:
+      - 8888:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@email.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+volumes:
+  local_pgdata:
+  pgadmin-data:
